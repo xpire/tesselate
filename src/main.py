@@ -3,8 +3,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk, ImageGrab
 from mss import mss
 import easyocr
-import translators as ts # from googletrans import Translator
-from functools import lru_cache
+import translators as ts
 
 from select import SelectWindow
 from ocr_reader import AsyncOCR
@@ -39,8 +38,6 @@ class Application(tk.Frame):
         # pause_btn.pack()
 
         # label to display image
-        # self.image_label = tk.Label(self, text="Click the button to select an area to watch.")
-        # self.image_label.pack()
         self.image_canvas = tk.Canvas(self, borderwidth=0, highlightthickness=1, highlightbackground="red")
         self.image_canvas.pack(fill=tk.BOTH, expand=True)
 
@@ -58,7 +55,6 @@ class Application(tk.Frame):
     def save_bbox(self, min_x, min_y, max_x, max_y):
         self.bbox = (min_x, min_y, max_x, max_y)
         print("selected: ", self.bbox)
-        # root.geometry(f"{max_x-min_x}x{max_y-min_y}+{min_x}+{min_y}")
         root.geometry(f"{max_x-min_x}x{max_y-min_y+10}")
         root.attributes('-topmost', True)
 
@@ -88,12 +84,9 @@ class Application(tk.Frame):
         # screenshot selected region
         sct_image = self.sct.grab(self.bbox)
         self.screenshot = Image.frombytes('RGB', sct_image.size, sct_image.bgra, 'raw', 'BGRX')
-        # self.screenshot = ImageGrab.grab(bbox=self.bbox)
 
         # Update screenshot thumbnail
-        image = ImageTk.PhotoImage(self.screenshot)
-        # self.image_label.configure(image=image)
-        # self.image_label.image = image    
+        image = ImageTk.PhotoImage(self.screenshot)   
         self.image_canvas.create_image(0, 0, image=image, anchor=tk.NW)
         self.image_canvas.img = image
 
