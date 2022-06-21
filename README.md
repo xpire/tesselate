@@ -1,7 +1,7 @@
 # tesselate
 OCR + Translation application which emulates google instant translate for your desktop
 
-# Features
+## Features
 - GUI for ease of use (drag on the screen to select area)
 - GPU accerated (requires cuda installation)
 
